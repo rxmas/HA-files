@@ -1,0 +1,6 @@
+17-03-31 20:42:46 ERROR (Thread-1) [homeassistant.util.yaml] duplicate key: "automation"
+  in "/home/homeassistant/.homeassistant/configuration.yaml", line 58, column 0
+  in "/home/homeassistant/.homeassistant/configuration.yaml", line 69, column 0
+17-03-31 20:42:46 ERROR (MainThread) [homeassistant.bootstrap] Error loading /home/homeassistant/.homeassistant/configuration.yaml: duplicate key: "automation"
+  in "/home/homeassistant/.homeassistant/configuration.yaml", line 58, column 0
+  in "/home/homeassistant/.homeassistant/configuration.yaml", line 69, column 0

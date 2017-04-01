@@ -1,0 +1,84 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret
+  longitude: !secret  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret
+
+
+# Some settings
+updater:        # Service checks for updates
+discovery:      # Discover some devices automatically
+frontend:       # Enable the front-end
+logbook:        # View all events in a logbook
+history:        # Enables support for tracking state changes over time.
+sun:            # Track the Sun and report whereabouts
+config:         # enable the new configuration panel
+
+
+
+
+sensor:
+  platform: yr
+  monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - pressure
+      - windDirection
+      - humidity
+      - dewpointTemperature
+
+
+
+
+mqtt:
+  broker: 127.0.0.1
+  port: !secret
+  client_id: !secret
+  username: !secret
+  password: !secret
+zwave:
+   usb_path: /dev/ttyACM0
+   config_path: /srv/homeassistant/homeassistant_venv/lib/python3.4/site-packages/libopenzwave-0.3.2-py3.4-linux-armv7l.egg/config
+
+shell_command:
+  restart_homeassistant: 'sudo su pi -c "sudo systemctl restart home-assistant"'
+
+
+
+group: !include groups.yaml
+automation: !include_dir_merge_list automation
+logger: !include logging.yaml
+
+
+
+
+##################################################################
+## Sun script
+##################################################################
+#
+automation:
+  - alias: 'Send notification when sun rises'
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: '+00:00:00'
+    action:
+      service: notify.pushbullet
+      data:
+        message: 'The sun is up.'
+  - alias: 'Send notification when sun sets'
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '+00:00:00'
+    action:
+      service: notify.pushbullet
+      data:
+        message: 'The sun is down.'

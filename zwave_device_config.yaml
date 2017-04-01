@@ -1,0 +1,21 @@
+sensor.remotec_zts110_temperature_2_1:
+  ignored: false
+  polling_intensity: 2
+climate.remotec_zts110_cooling_1_2_2:
+  ignored: true
+  polling_intensity: 1
+climate.remotec_zts110_heating_1_2_1:
+  ignored: false
+  polling_intensity: 1
+sensor.remotec_zts110_battery_level_2_0:
+  ignored: false
+  polling_intensity: 2
+switch.__switch_4_0:
+  ignored: false
+  polling_intensity: 2
+switch.enerwave_zwnrsm1_plussmart_single_relay_switch_module_switch_3_0:
+  ignored: false
+  polling_intensity: 2
+
+
+# both switches are the same make and model but this is how zwave lists them.
